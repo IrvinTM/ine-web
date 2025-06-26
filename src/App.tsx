@@ -12,7 +12,6 @@ function App() {
   const [valorResidual, setValorResidual] = useState<number | null>(null)
   const [vidaUtil, setVidaUtil] = useState<number | null>(null)
   const [unidadesAnuales, setUnidadesAnuales] = useState<number[]>([])
-  const [criterio, setCriterio] = useState<'max_depreciacion_inicial' | 'min_varianza' | null>(null)
   const [resultados, setResultados] = useState<any>(null)
 
   const calcularDepreciacion = () => {
@@ -20,8 +19,7 @@ function App() {
       costoInicial === null ||
       valorResidual === null ||
       vidaUtil === null ||
-      unidadesAnuales.length === 0 ||
-      criterio === null
+      unidadesAnuales.length === 0
     ) {
       alert('Por favor, complete todos los campos.')
       return
@@ -41,7 +39,7 @@ function App() {
       )
     }
 
-    const [metodoOptimo, valoresOptimos] = seleccionOptima(metodos, criterio)
+    const [metodoOptimo, valoresOptimos] = seleccionOptima(metodos, 'max_depreciacion_inicial') // Criterio fijo
 
     setResultados({
       metodos,
@@ -97,24 +95,6 @@ function App() {
             }
             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
           />
-        </label>
-      </div>
-      <div className="mb-4">
-        <label className="block text-gray-700 text-sm font-bold mb-2">
-          Criterio de Selección:
-          <select
-            value={criterio || ''}
-            onChange={(e) =>
-              setCriterio(
-                e.target.value as 'max_depreciacion_inicial' | 'min_varianza'
-              )
-            }
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-          >
-            <option value="">Seleccionar</option>
-            <option value="max_depreciacion_inicial">Máxima Depreciación Inicial</option>
-            <option value="min_varianza">Mínima Varianza</option>
-          </select>
         </label>
       </div>
       <button
