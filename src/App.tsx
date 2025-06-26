@@ -107,7 +107,46 @@ function App() {
       {resultados && (
         <div className="mt-8">
           <h2 className="text-xl font-bold mb-2">Resultados:</h2>
-          <pre>{JSON.stringify(resultados, null, 2)}</pre>
+          <div className="mb-4">
+            <h3 className="text-lg font-bold">Métodos de Depreciación:</h3>
+            <table className="table-auto border-collapse border border-gray-400 w-full">
+              <thead>
+                <tr>
+                  <th className="border border-gray-400 px-4 py-2">Método</th>
+                  <th className="border border-gray-400 px-4 py-2">Valores</th>
+                </tr>
+              </thead>
+              <tbody>
+                {Object.entries(resultados.metodos).map(([metodo, valores]) => (
+                  <tr key={metodo}>
+                    <td className="border border-gray-400 px-4 py-2">{metodo}</td>
+                    <td className="border border-gray-400 px-4 py-2">
+                      {valores.join(', ')}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          <div className="mb-4">
+            <h3 className="text-lg font-bold">Método Óptimo:</h3>
+            <table className="table-auto border-collapse border border-gray-400 w-full">
+              <thead>
+                <tr>
+                  <th className="border border-gray-400 px-4 py-2">Método</th>
+                  <th className="border border-gray-400 px-4 py-2">Valores</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td className="border border-gray-400 px-4 py-2">{resultados.metodoOptimo}</td>
+                  <td className="border border-gray-400 px-4 py-2">
+                    {resultados.valoresOptimos.join(', ')}
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
       )}
     </div>
